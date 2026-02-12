@@ -114,14 +114,14 @@ while editAgain == 1:
         Image = ImageEnhance.Contrast(Image)
         Image.enhance(2)
 
-    # print("would you like to make another edit? (Y/N)")
-    # moreEdit = input()
-    # moreEdit = moreEdit.upper()
-    # if moreEdit == "Y":
-    #     editAgain = 1
-    # if moreEdit == "N":
-    #     editAgain = 0
-
+    print("would you like to make another edit? (Y/N)")
+    moreEdit = input()
+    moreEdit = moreEdit.upper()
+    if moreEdit == "Y":
+        editAgain = 1
+    if moreEdit == "N":
+        editAgain = 0
+    #
     # Image.save("editedImage.png")
     # Image.close()
     # Image = Image.open("editedImage.png")
