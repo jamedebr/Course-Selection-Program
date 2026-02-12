@@ -1,104 +1,130 @@
+
+
+
+#just replaced selected Image with Image, now Image.crop doesn't exist lol
+
+
+
+
 import os,sys
-from PIL import Image
-from PIL import ImageEnhance
-from PIL import ImageChops
-im1= Image.open("peepoHappy.png")
+from PIL import ImageEnhance, Image, ImageChops, ImageDraw
+
+im1 = Image.open("peepoHappy.png")
 im2 = Image.open("POG_MLG-removebg-preview.png")
+im3 = Image.open("peeposad.png")
+im4 = Image.open("peepocheer.jpg")
+
+im4 = im4.save("peepocheer.png")
+
 xsize, ysize = im1.size
 im2 = im2.resize(im1.size)
 
+print("Which Peepo do you want? Happy, Sad, or Cheer?")
+selection = input()
+selection = selection.upper()
+print(selection+" selected")
+
+Image = im1
+if selection == "HAPPY":
+    Image = im1
+if selection == "SAD":
+    Image = im3
+if selection == "CHEER":
+    Image = im4
 
 
-print("what edit u want? crop, saturate, or flip?")
-editType = input()
-editType = editType.upper()
+editAgain = 1
 
 
-if editType == "CROP":
+while editAgain == 1:
 
-    print("Where do you want to crop from, top left, lop right, bottom left, bottom right, or middle?")
-    cropType = input()
-    cropType = cropType.upper()
-    if cropType == "TOP LEFT":
-        print("how wide (in pixels)? Max size = "+ str(xsize))
-        cropWidth = input()
-        print("how tall (in pixels)? Max size = "+ str(ysize))
-        cropHeight = input()
-        box = (0, 0, int(cropWidth), int(cropHeight))
-        image = im1.crop(box)
-        image.show()
+    print("what edit u want? crop, saturate, or rotate?")
+    editType = input()
+    editType = editType.upper()
 
-    if cropType == "TOP RIGHT":
-        print("how wide (in pixels)? Max size = " + str(xsize))
-        cropWidth = input()
-        print("how tall (in pixels)? Max size = " + str(ysize))
-        cropHeight = input()
-        box = (int(xsize) - int(cropWidth), 0, xsize, cropHeight)
-        image = im1.crop(box)
-        image.show()
+    if editType == "CROP":
 
-    if cropType == "BOTTOM LEFT":
-        print("how wide (in pixels)? Max size = " + str(xsize))
-        cropWidth = input()
-        print("how tall (in pixels)? Max size = " + str(ysize))
-        cropHeight = input()
-        box = (0, int(ysize) - int(cropHeight), cropWidth, ysize)
-        image = im1.crop(box)
-        image.show()
+        print("Where do you want to crop from, top left, top right, bottom left, bottom right, or middle?")
+        cropType = input()
+        cropType = cropType.upper()
+        if cropType == "TOP LEFT":
+            print("how wide (in pixels)? Max size = "+ str(xsize))
+            cropWidth = input()
+            print("how tall (in pixels)? Max size = "+ str(ysize))
+            cropHeight = input()
+            box = (0, 0, int(cropWidth), int(cropHeight))
+            Image = Image.crop(box)
+            Image.show()
 
-    if cropType == "BOTTOM RIGHT":
-        print("how wide (in pixels)? Max size = " + str(xsize))
-        cropWidth = input()
-        print("how tall (in pixels)? Max size = " + str(ysize))
-        cropHeight = input()
-        box = (int(xsize) - int(cropWidth), int(ysize) - int(cropHeight), xsize, ysize)
-        image = im1.crop(box)
-        image.show()
+        if cropType == "TOP RIGHT":
+            print("how wide (in pixels)? Max size = " + str(xsize))
+            cropWidth = input()
+            print("how tall (in pixels)? Max size = " + str(ysize))
+            cropHeight = input()
+            box = (int(xsize) - int(cropWidth), 0, xsize, cropHeight)
+            Image = Image.crop(box)
+            Image.show()
 
-    if cropType == "MIDDLE":
-        print("how wide (in pixels)? Max size = " + str(xsize))
-        cropWidth = input()
-        print("how tall (in pixels)? Max size = " + str(ysize))
-        cropHeight = input()
-        box = (int(xsize)/2 - int(cropWidth)/2, int(ysize)/2 - int(cropHeight)/2, int(xsize)/2 + int(cropWidth)/2, int(ysize)/2 + int(cropHeight)/2)
-        image = im1.crop(box)
-        image.show()
+        if cropType == "BOTTOM LEFT":
+            print("how wide (in pixels)? Max size = " + str(xsize))
+            cropWidth = input()
+            print("how tall (in pixels)? Max size = " + str(ysize))
+            cropHeight = input()
+            box = (0, int(ysize) - int(cropHeight), cropWidth, ysize)
+            Image = Image.crop(box)
+            Image.show()
 
-if editType == "ASCEND":
+        if cropType == "BOTTOM RIGHT":
+            print("how wide (in pixels)? Max size = " + str(xsize))
+            cropWidth = input()
+            print("how tall (in pixels)? Max size = " + str(ysize))
+            cropHeight = input()
+            box = (int(xsize) - int(cropWidth), int(ysize) - int(cropHeight), xsize, ysize)
+            Image = Image.crop(box)
+            Image.show()
 
-    image = im1.point(lambda i: i * 20)
-    image.show()
-if editType == "SATURATE":
-    print("how much would you like to satuate it? Recommended range 2-20")
-    saturationValue = input()
-    image = ImageEnhance.Contrast(im1)
-    image.enhance(int(saturationValue)).show()
+        if cropType == "MIDDLE":
+            print("how wide (in pixels)? Max size = " + str(xsize))
+            cropWidth = input()
+            print("how tall (in pixels)? Max size = " + str(ysize))
+            cropHeight = input()
+            box = (int(xsize)/2 - int(cropWidth)/2, int(ysize)/2 - int(cropHeight)/2, int(xsize)/2 + int(cropWidth)/2, int(ysize)/2 + int(cropHeight)/2)
+            Image = Image.crop(box)
+            Image.show()
 
-if editType == "FLIP":
+    if editType == "ASCEND":
+        Image = Image.point(lambda i: i * 20)
+        Image.show()
 
-    image = im1.transpose(Image.Transpose.ROTATE_180)
-    image.show()
-
-if editType == "MLG":
-    image = ImageChops.overlay(im1, im2)
-    image = ImageEnhance.Contrast(image)
-    image.enhance(2).show()
-    #image.show()
+    if editType == "SATURATE":
+        print("how much would you like to saturate it? Recommended range 2-30")
+        saturationValue = input()
+        Image = ImageEnhance.Contrast(Image)
+        Image.enhance(int(saturationValue)).show()
 
 
+    if editType == "ROTATE":
+        print("How much do you want to rotate by?")
+        rotateAngle = input()
+        Image_rotated = Image.rotate(angle=float(rotateAngle)).show()
+        Image = Image_rotated
 
-#while RunProgram == True:
-#    if askPhoto == True:
-#        print('Welcome to your photo editor!')
-#        print('please select which photo to edit')
-#        print('a,','#somehow your photo here')
-#        print('b,', '#somehow your photo here')
-#        print('c,', '#somehow your photo here')
-#        askPhoto = False
-#        PhotoDetermine = input()
-#        if PhotoDetermine == 'a':
-#            print('Great choice!')
-#    if TypeEdit == True:
-#        print('what type of edit do you want to make?')
-#        print('Options: Rotate, Crop, Brighten, Dim, Change file type')
-#        TypeEdit = False
+    if editType == "MLG":
+        Image = ImageChops.overlay(Image, im2)
+        Image = ImageEnhance.Contrast(Image)
+        Image.enhance(2)
+
+    # print("would you like to make another edit? (Y/N)")
+    # moreEdit = input()
+    # moreEdit = moreEdit.upper()
+    # if moreEdit == "Y":
+    #     editAgain = 1
+    # if moreEdit == "N":
+    #     editAgain = 0
+
+    # Image.save("editedImage.png")
+    # Image.close()
+    # Image = Image.open("editedImage.png")
+
+print("finished editing")
+Image.show()
