@@ -7,7 +7,7 @@
 
 
 import os,sys
-from PIL import ImageEnhance, Image, ImageChops, ImageDraw
+from PIL import ImageEnhance, Image, ImageChops, ImageDraw, ImageEnhance
 
 im1 = Image.open("peepoHappy.png")
 im2 = Image.open("POG_MLG-removebg-preview.png")
@@ -61,7 +61,7 @@ while editAgain == 1:
             cropWidth = input()
             print("how tall (in pixels)? Max size = " + str(ysize))
             cropHeight = input()
-            box = (int(xsize) - int(cropWidth), 0, xsize, cropHeight)
+            box = (int(xsize) - int(cropWidth), 0, xsize, int(cropHeight))
             Image = Image.crop(box)
             Image.show()
 
@@ -100,7 +100,9 @@ while editAgain == 1:
         print("how much would you like to saturate it? Recommended range 2-30")
         saturationValue = input()
         Image = ImageEnhance.Contrast(Image)
-        Image.enhance(int(saturationValue)).show()
+        Image = Image.enhance(int(saturationValue))
+        Image.show()
+
 
 
     if editType == "ROTATE":
@@ -113,6 +115,7 @@ while editAgain == 1:
         Image = ImageChops.overlay(Image, im2)
         Image = ImageEnhance.Contrast(Image)
         Image.enhance(2)
+        Image.show()
 
     print("would you like to make another edit? (Y/N)")
     moreEdit = input()
@@ -121,7 +124,7 @@ while editAgain == 1:
         editAgain = 1
     if moreEdit == "N":
         editAgain = 0
-    #
+
     # Image.save("editedImage.png")
     # Image.close()
     # Image = Image.open("editedImage.png")
