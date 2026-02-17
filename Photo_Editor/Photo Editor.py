@@ -108,8 +108,8 @@ while editAgain == 1:
     if editType == "ROTATE":
         print("How much do you want to rotate by?")
         rotateAngle = input()
-        Image_rotated = Image.rotate(angle=float(rotateAngle)).show()
-        Image = Image_rotated
+        Image = Image.rotate(angle=float(rotateAngle))
+        Image.show()
 
     if editType == "MLG":
         Image = ImageChops.overlay(Image, im2)
