@@ -8,50 +8,49 @@ from kivy.uix.button import Button
 # you can control the ScreenManager from kv. Each screen has by default a
 # property manager that gives you the instance of the ScreenManager used.
 
-# <HomeScreen>:
-#     BoxLayout:
-#         Button:
-#             text: 'Go to settings'
-#             on_press: root.manager.current = 'settings'
-#         Button:
-#             text: 'Quit'
-#             on_press: root.manager.current = 'quit'
-#
-
 
 Builder.load_string("""
 
 <HomeScreen>:
     FloatLayout:
         Button:
-            text: 'Go to settings'
-            size_hint: 0.3, 0.2
-            pos_hint: {"x": 0.1, "y": 0.4}
+            text: 'Settings'
+            size_hint: 0.2, 0.1
+            pos_hint: {"x": 0.25, "y": 0.0}
             on_press: root.manager.current = 'settings'
             
         Button:
             text: 'Quit'
-            size_hint: 0.3, 0.2
-            pos_hint: {"x": 0.6, "y": 0.4}
+            size_hint: 0.2, 0.1
+            pos_hint: {"x": 0.55, "y": 0.0}
             on_press: root.manager.current = 'quit'
             
 
 
 <SettingsScreen>:
-    BoxLayout:
+    FloatLayout:
         Button:
             text: 'This button has the settings'
+            size_hint: 0.2, 0.1
+            pos_hint: {"x": 0.25, "y": 0.0}
+        
         Button:
             text: 'Back to home'
+            size_hint: 0.2, 0.1
+            pos_hint: {"x": 0.55, "y": 0.0}
             on_press: root.manager.current = 'home'
             
 <QuitScreen>:
-    BoxLayout:
+    FloatLayout:
         Button:
             text: 'go back to home'
+            size_hint: 0.2, 0.1
+            pos_hint: {"x": 0.25, "y": 0.0}
             on_press: root.manager.current = 'home'
         Button:
             text: 'confirm quit'
+            size_hint: 0.2, 0.1
+            pos_hint: {"x": 0.55, "y": 0.0}
             on_press: TestApp().quit()
 """)
 
