@@ -1,17 +1,42 @@
+from kivy.app import App
+from plyer import gps
+from kivy.clock import mainthread
+
+class GPSApp(App):
+    def on_start(self):
+        # Configure and start GPS service once on app start
+        try:
+            gps.configure(on_location=self.on_location)
+            gps.start()
+        except NotImplementedError:
+            print("GPS not supported on this platform")
+
+    @mainthread
+    def on_location(self, **kwargs):
+        # This function runs every time the location updates
+        # kwargs contains: lat, lon, speed, bearing, altitude, accuracy
+        print(f"Latitude: {kwargs['lat']}, Longitude: {kwargs['lon']}")
+
+    def on_stop(self):
+        gps.stop()
+
+if __name__ == '__main__':
+    GPSApp().run()
+
 # with open('accounts.txt', 'r') as file:
 #     lines = file.readlines()
 #     lines.sort(key=lambda lines: int(lines.split()[-1]), reverse=True)
 # print(lines)
 
-user = ["abcd", "efgh"]
-
-if len(user) >= 3:
-    numlaps = user[2]
-else:
-    numlaps = "0"
-    user.append("0")
-
-print(user)
+# user = ["abcd", "efgh"]
+#
+# if len(user) >= 3:
+#     numlaps = user[2]
+# else:
+#     numlaps = "0"
+#     user.append("0")
+#
+# print(user)
 # <Home>:
 #     GridLayout:
 #         cols: 3
