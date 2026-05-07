@@ -2,6 +2,7 @@ from kivy.app import App
 from plyer import gps
 from kivy.clock import mainthread
 
+# edit
 class GPSApp(App):
     def on_start(self):
         # Configure and start GPS service once on app start
