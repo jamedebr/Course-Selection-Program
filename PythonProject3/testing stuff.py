@@ -1,30 +1,32 @@
-from kivy.app import App
-from plyer import gps
-from kivy.clock import mainthread
 
-# edit
-class GPSApp(App):
-    def on_start(self):
-        # Configure and start GPS service once on app start
-        try:
-            gps.configure(on_location=self.on_location)
-            gps.start()
-        except NotImplementedError:
-            print("GPS not supported on this platform")
 
-    @mainthread
-    def on_location(self, **kwargs):
-        # This function runs every time the location updates
-        # kwargs contains: lat, lon, speed, bearing, altitude, accuracy
-        print(f"Latitude: {kwargs['lat']}, Longitude: {kwargs['lon']}")
+# cp1 = [0.1234, 0.3456]
+# cp2 = [1.1234, 0.3456]
+# cp3 = [1.1234, 1.3456]
+# cp4 = [0.1234, 1.3456]
 
-    def on_stop(self):
-        gps.stop()
+# checkpoint1 = False
+# checkpoint2 = False
+# checkpoint3 = False
+# checkpoint4 = False
 
-if __name__ == '__main__':
-    GPSApp().run()
 
-# with open('accounts.txt', 'r') as file:
+#location = getlocation()
+# if location[0] > cp1[0] and location[1] > cp1[1]: <--includes outside    or   doesn't include outside-->   if abs(location[0]-cp1[0]) < 0.1 and abs(location[1]-cp1[1]) < 0.1:
+#     print("cp1 reached")
+#     checkpoint1 = True
+
+# if checkpoint1 == True and checkpoint2 == True and checkpoint3 == True and checkpoint4 == True:
+#   laps += 1
+#   checkpoint1 = False
+#   checkpoint2 = False
+#   checkpoint3 = False
+#   checkpoint4 = False
+
+
+
+
+
 #     lines = file.readlines()
 #     lines.sort(key=lambda lines: int(lines.split()[-1]), reverse=True)
 # print(lines)
